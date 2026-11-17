@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
+import Product from './Product';
 
 export default function Home() {
 
-    const [allProducts, setAllProducts] = useState(null);
+    const [allProducts, setAllProducts] = useState([]);
 
     // fetch('https://dummyjson.com/products')
     // .then(resp => resp.json())
@@ -24,7 +25,10 @@ export default function Home() {
         console.log("calling fetch");        
         fetch('https://dummyjson.com/products')
         .then(resp => resp.json())
-        .then(data => setAllProducts(data.products))
+        .then(data => {
+            console.log(data.products.slice(0,6)); // slicing from 0 to 6 --- 0 to 5           
+            setAllProducts(data.products.slice(0,6));
+        })
         .catch(err => console.log(err));
     },[]);
 
@@ -36,10 +40,16 @@ export default function Home() {
 
   return (
     <>
-        <div>Home</div>
+        {/* <div>Home</div>
         <button onClick={()=>setCount(count+1)}>
             Current count { count }
-        </button>
+        </button> */}
+        <h2>Product List</h2>
+        <div className="row">
+        { allProducts && 
+            allProducts.map(prodObj => <Product key={prodObj.id}  obj={prodObj} name={prodObj.title} />)
+        }
+        </div>
     </>
   )
 }
