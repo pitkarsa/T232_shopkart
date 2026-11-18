@@ -10,7 +10,7 @@ export default function Product(props) {
     <div className="col-4 mt-2">
       {/* Card  - {name} */}
       <div className="card card-hover" style={{ width: "100%" }}>
-        <img src={productObject.images[0]} className="card-img-top" alt="..." height="180px" />
+        <img src={productObject.images[0]} className="card-img-top" alt="..." height="200px" />
         <div className="card-body">
           <h5 className="card-title">{productObject.title}</h5>
           <h6>Category: {productObject.category}</h6>
