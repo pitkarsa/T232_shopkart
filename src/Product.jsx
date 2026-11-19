@@ -1,5 +1,6 @@
 import React from 'react'
 import './Product.css'
+import { NavLink } from 'react-router-dom';
 
 export default function Product(props) {
   console.log(props);
@@ -16,7 +17,7 @@ export default function Product(props) {
           <h6>Category: {productObject.category}</h6>
           <p className="card-text">{productObject.description.slice(0,50)} <a href="">Read More</a> </p>
           <p>Price: <strong>$ {productObject.price}</strong></p>
-          <a href="#" className="btn btn-primary">Details</a>
+          <NavLink to={`/details/${productObject.id}`} className="btn btn-primary">Details</NavLink>
           <a href="#" className="btn btn-danger ms-2">Delete</a>
           <a href="#" className="btn btn-warning ms-2">Update</a>
         </div>

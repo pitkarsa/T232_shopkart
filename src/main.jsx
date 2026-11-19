@@ -10,6 +10,7 @@ import Login from './Login'
 import Register from './Register'
 import AboutUs from './AboutUs'
 import ContactUs from './ContactUs'
+import Details from './Details.jsx'
 
 const routerArray = createBrowserRouter([
   // route objects - array of routes
@@ -38,6 +39,11 @@ const routerArray = createBrowserRouter([
       {
         path:'aboutus',
         element: <AboutUs />
+      },
+      {
+        // localhost:5173/details/3
+        path: 'details/:pid',
+        element: <Details />
       }
     ]
   }  
