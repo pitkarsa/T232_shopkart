@@ -23,11 +23,12 @@ export default function Home() {
 
     useEffect(()=>{
         console.log("calling fetch");        
-        fetch('https://dummyjson.com/products')
+        fetch(`${import.meta.env.VITE_API_URL}/products`)
         .then(resp => resp.json())
         .then(data => {
-            console.log(data.products.slice(0,6)); // slicing from 0 to 6 --- 0 to 5           
-            setAllProducts(data.products.slice(0,6));
+            // console.log(data);
+            // console.log(data._embedded.products);
+            setAllProducts(data._embedded.products);
         })
         .catch(err => console.log(err));
     },[]);
