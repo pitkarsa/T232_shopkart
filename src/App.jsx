@@ -10,6 +10,18 @@ function App() {
   const myStyle = {
       backgroundColor: "#5a0364"
   }
+  const token = localStorage.getItem("token");
+  const userId = localStorage.getItem("userId");
+  const username = localStorage.getItem("username");
+  const roles = localStorage.getItem("roles");
+// by default all of these will be null
+   
+  function doLogout(){
+    localStorage.clear();
+    alert("Logged out successfully!!");
+    window.location.href="/";
+  }
+
 
   return (
     <div className="container-fluid">
@@ -29,20 +41,45 @@ function App() {
            href="/">Home</a> */}
           <NavLink className="nav-link" to={'/'}>Home</NavLink>
         </li>
-        <li className="nav-item">
-          {/* <a className="nav-link" href="#">Contact Us</a> */}
+        { roles?.includes("ADMIN") && 
+          <li className="nav-item">
            <NavLink className="nav-link" to={"/add-product"}>
            Add Product</NavLink>
-        </li>
-        <li className="nav-item">
-          {/* <a className="nav-link" href="/register">Register</a>
-           */}
-           <NavLink className="nav-link" to={'/register'}>Register</NavLink>
-        </li>
-        <li className="nav-item">
-          {/* <a className="nav-link" href="/login">Login</a> */}
-          <NavLink className="nav-link" to={'/login'}>Login</NavLink>
-        </li>
+          </li>
+        }
+        {
+          roles?.includes("USER") && 
+          <>
+          <li className="nav-item">
+            <NavLink className="nav-link" >
+            My Cart</NavLink>
+          </li>
+           <li className="nav-item">
+            <NavLink className="nav-link" >
+            My Orders</NavLink>
+          </li>
+          </>
+        }
+        { (!token) &&
+        <>
+          <li className="nav-item">
+            {/* <a className="nav-link" href="/register">Register</a>
+            */}
+            <NavLink className="nav-link" to={'/register'}>Register</NavLink>
+          </li>
+          <li className="nav-item">
+            {/* <a className="nav-link" href="/login">Login</a> */}
+            <NavLink className="nav-link" to={'/login'}>Login</NavLink>
+          </li>
+        </>
+        }
+        {
+          token &&
+          <li className="nav-item">
+            {/* <a className="nav-link" href="/login">Login</a> */}
+            <button className="nav-link" onClick={doLogout}>Logout</button>
+          </li>
+        }
         <li className="nav-item">
           {/* <a className="nav-link" href="#">About Us</a> */}
           <NavLink className="nav-link" to={"/aboutus"}>About Us</NavLink>
